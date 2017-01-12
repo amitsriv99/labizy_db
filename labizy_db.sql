@@ -76,8 +76,10 @@ CREATE TABLE `user_address_tb` (
   `user_id` varchar(60) COLLATE utf16_unicode_ci NOT NULL,
   `address_id` varchar(60) COLLATE utf16_unicode_ci NOT NULL,
   `is_primary_address` tinyint(1) NOT NULL,
+  `is_billing_address` tinyint(1) NOT NULL,
   PRIMARY KEY (`user_id`,`address_id`,`is_primary_address`),
   KEY `FK2_user_address_tb` (`address_id`),
+  KEY `UserAddressIndexUK1` (`user_id`,`address_id`,`is_billing_address`),
   CONSTRAINT `FK1_user_address_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`),
   CONSTRAINT `FK2_user_address_tb` FOREIGN KEY (`address_id`) REFERENCES `address_tb` (`address_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
@@ -94,8 +96,8 @@ CREATE TABLE `user_contact_tb` (
   `is_primary_contact` tinyint(1) NOT NULL,
   PRIMARY KEY (`user_id`,`contact_id`,`is_primary_contact`),
   KEY `FK2_user_contact_tb` (`contact_id`),
-  CONSTRAINT `FK2_user_contact_tb` FOREIGN KEY (`contact_id`) REFERENCES `contact_tb` (`contact_id`),
-  CONSTRAINT `FK1_user_contact_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`)
+  CONSTRAINT `FK1_user_contact_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`),
+  CONSTRAINT `FK2_user_contact_tb` FOREIGN KEY (`contact_id`) REFERENCES `contact_tb` (`contact_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 /*Data for the table `user_contact_tb` */
@@ -126,11 +128,9 @@ CREATE TABLE `user_profile_tb` (
   `middle_name` varchar(60) COLLATE utf16_unicode_ci DEFAULT NULL,
   `last_name` varchar(60) COLLATE utf16_unicode_ci NOT NULL,
   `sex` char(20) COLLATE utf16_unicode_ci NOT NULL,
-  `age_in_months` int(11) NOT NULL,
   `date_of_birth` datetime NOT NULL,
   `marital_status` char(20) COLLATE utf16_unicode_ci NOT NULL,
   `profile_picture` varchar(2000) COLLATE utf16_unicode_ci DEFAULT NULL,
-  `status` char(20) COLLATE utf16_unicode_ci NOT NULL,
   `is_primary_profile` tinyint(1) NOT NULL,
   PRIMARY KEY (`user_id`),
   CONSTRAINT `FK_user_profile_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`)
