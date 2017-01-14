@@ -74,8 +74,8 @@ CREATE TABLE `user_address_tb` (
   PRIMARY KEY (`user_id`,`address_id`,`is_primary_address`),
   KEY `FK2_user_address_tb` (`address_id`),
   KEY `UserAddressIndexUK1` (`user_id`,`address_id`,`is_billing_address`),
-  CONSTRAINT `FK2_user_address_tb` FOREIGN KEY (`address_id`) REFERENCES `address_tb` (`address_id`),
-  CONSTRAINT `FK1_user_address_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`)
+  CONSTRAINT `FK1_user_address_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`),
+  CONSTRAINT `FK2_user_address_tb` FOREIGN KEY (`address_id`) REFERENCES `address_tb` (`address_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Table structure for table `user_contact_tb` */
@@ -88,8 +88,8 @@ CREATE TABLE `user_contact_tb` (
   `is_primary_contact` tinyint(1) NOT NULL,
   PRIMARY KEY (`user_id`,`contact_id`,`is_primary_contact`),
   KEY `FK2_user_contact_tb` (`contact_id`),
-  CONSTRAINT `FK2_user_contact_tb` FOREIGN KEY (`contact_id`) REFERENCES `contact_tb` (`contact_id`),
-  CONSTRAINT `FK1_user_contact_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`)
+  CONSTRAINT `FK1_user_contact_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`),
+  CONSTRAINT `FK2_user_contact_tb` FOREIGN KEY (`contact_id`) REFERENCES `contact_tb` (`contact_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Table structure for table `user_oauth_tb` */
@@ -98,11 +98,11 @@ DROP TABLE IF EXISTS `user_oauth_tb`;
 
 CREATE TABLE `user_oauth_tb` (
   `user_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `client_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `oauth_token` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `oauth_token_issued_on` datetime NOT NULL,
   `is_guest` tinyint(1) NOT NULL,
-  PRIMARY KEY (`user_id`,`client_id`),
+  `token_type` char(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`user_id`),
   CONSTRAINT `FK_user_oauth_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -135,8 +135,8 @@ CREATE TABLE `user_relationships` (
   `relationship` char(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`,`relation_user_id`),
   KEY `FK2_user_relationships` (`relation_user_id`),
-  CONSTRAINT `FK2_user_relationships` FOREIGN KEY (`relation_user_id`) REFERENCES `user_tb` (`user_id`),
-  CONSTRAINT `FK1_user_relationships` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`)
+  CONSTRAINT `FK1_user_relationships` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`),
+  CONSTRAINT `FK2_user_relationships` FOREIGN KEY (`relation_user_id`) REFERENCES `user_tb` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Table structure for table `user_tb` */
@@ -148,6 +148,7 @@ CREATE TABLE `user_tb` (
   `email_id` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `status` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_real_user` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
