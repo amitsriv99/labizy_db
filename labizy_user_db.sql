@@ -146,9 +146,11 @@ DROP TABLE IF EXISTS `user_tb`;
 CREATE TABLE `user_tb` (
   `user_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `email_id` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `status` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_real_user` tinyint(1) DEFAULT NULL,
+  `is_real_user` tinyint(1) NOT NULL,
+  `is_guest_user` tinyint(1) NOT NULL,
+  `is_internal_user` tinyint(1) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
