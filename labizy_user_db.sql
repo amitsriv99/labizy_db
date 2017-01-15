@@ -100,7 +100,6 @@ CREATE TABLE `user_oauth_tb` (
   `user_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `oauth_token` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `oauth_token_issued_on` datetime NOT NULL,
-  `is_guest` tinyint(1) NOT NULL,
   `token_type` char(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`),
   CONSTRAINT `FK_user_oauth_tb` FOREIGN KEY (`user_id`) REFERENCES `user_tb` (`user_id`)
