@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `labs_tb` (
   `lab_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `group_name` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
-  `parent_lab_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `parent_lab_id` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `thumbnail_image_url` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`lab_id`),
