@@ -67,6 +67,16 @@ CREATE TABLE IF NOT EXISTS `labs_details_tb` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
+-- Dumping structure for table labizy_product_labs_db.labs_ranking_tb
+DROP TABLE IF EXISTS `labs_ranking_tb`;
+CREATE TABLE IF NOT EXISTS `labs_ranking_tb` (
+  `lab_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `rank` int(11) NOT NULL,
+  PRIMARY KEY (`lab_id`),
+  CONSTRAINT `FK_labs_ranking_tb` FOREIGN KEY (`lab_id`) REFERENCES `labs_tb` (`lab_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+-- Data exporting was unselected.
 -- Dumping structure for table labizy_product_labs_db.labs_tb
 DROP TABLE IF EXISTS `labs_tb`;
 CREATE TABLE IF NOT EXISTS `labs_tb` (
@@ -105,6 +115,16 @@ CREATE TABLE IF NOT EXISTS `product_details_tb` (
   `large_size_image_text` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   CONSTRAINT `FK_product_details_tb` FOREIGN KEY (`product_id`) REFERENCES `product_tb` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+-- Data exporting was unselected.
+-- Dumping structure for table labizy_product_labs_db.product_ranking_tb
+DROP TABLE IF EXISTS `product_ranking_tb`;
+CREATE TABLE IF NOT EXISTS `product_ranking_tb` (
+  `product_id` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `rank` int(11) NOT NULL,
+  PRIMARY KEY (`product_id`),
+  CONSTRAINT `FK_product_ranking_tb` FOREIGN KEY (`product_id`) REFERENCES `product_tb` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- Data exporting was unselected.
